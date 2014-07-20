@@ -1,0 +1,11 @@
+Jack Osc Tools
+==============
+
+Misc OSC over Jack tools.
+
+Don't expect anything too major for this as the tools will mostly be simple test
+probes for evaluating rtosc related stuff.
+
+Tool List
+---------
+- LFO: Generate a Low Frequency Oscillation/Modulation of a parameter
