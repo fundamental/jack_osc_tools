@@ -161,14 +161,14 @@ int main(int argc, char **argv)
     message_size = rtosc_message_length(message,-1);
     assert(message_size);
 
-    const char *progname = "osc_lfo";
+    const char *progname = "jack_oscsend";
 
-    client = jack_client_open (progname, JackNullOption, NULL);
+    client = jack_client_open(progname, JackNullOption, NULL);
     if(!client)
         errx(1, "Failed to create JACK client");
 
     jack_set_process_callback (client, process, 0);
-    osc_out = jack_port_register (client, "out", JACK_DEFAULT_OSC_TYPE, JackNoStartServer, 0);
+    osc_out = jack_port_register(client, "out", JACK_DEFAULT_OSC_TYPE, JackNoStartServer, 0);
     if(!osc_out)
         errx(1, "Failed to register JACK port");
 
