@@ -51,6 +51,7 @@ char getArgType(const char *arg)
     switch(*arg)
     {
         case 's':
+        case 'S':
         case 'c':
         case 'i':
         case 'f':
@@ -69,6 +70,7 @@ rtosc_arg_t getArgValue(const char *arg, char type)
     switch(type)
     {
         case 's':
+        case 'S':
             tmp.s = arg;
             break;
         case 'c':
@@ -101,7 +103,7 @@ char *stringToOsc(int argc, char **argv)
     for(int i=0, j=0; j<argc;++i)
     {
         typestring[i] = getArgType(argv[j]);
-        if(typestring[i] == 's') {
+        if(typestring[i] == 's' || typestring[i] == 'S') {
             if(j+1 == argc)
                 errx(1, "Invalid String Arg");
             args[i] = getArgValue(argv[j+1], typestring[i]);
