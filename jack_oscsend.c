@@ -55,6 +55,9 @@ char getArgType(const char *arg)
         case 'c':
         case 'i':
         case 'f':
+        case 'd':
+        case 'h':
+        case 't':
         case 'T':
         case 'F':
         case 'N':
@@ -77,7 +80,12 @@ rtosc_arg_t getArgValue(const char *arg, char type)
         case 'i':
             tmp.i = atoi(arg+1);
             break;
+        case 'h':
+        case 't':
+            tmp.i = atoll(arg+1);
+            break;
         case 'f':
+        case 'd':
             tmp.f = atof(arg+1);
             break;
     };
