@@ -18,7 +18,7 @@ void validate_path(const char *path)
     if(c != '/')
         errx(1,"Path must start with '/'");
 
-    while(isalnum(c) || c == '/')
+    while(isalnum(c) || c == '/' || c == '-' || c == '_')
         c = *path++;
 
     if(c)
@@ -178,7 +178,7 @@ int main(int argc, char **argv)
         errx(1, "Failed to create JACK client");
 
     jack_set_process_callback (client, process, 0);
-    osc_out = jack_port_register(client, "out", JACK_DEFAULT_OSC_TYPE, JackNoStartServer, 0);
+    osc_out = jack_port_register(client, "out", JACK_DEFAULT_OSC_TYPE, JackPortIsOutput, 0);
     if(!osc_out)
         errx(1, "Failed to register JACK port");
 
