@@ -8,4 +8,5 @@ probes for evaluating rtosc related stuff.
 
 Tool List
 ---------
-- LFO: Generate a Low Frequency Oscillation/Modulation of a parameter
+- jack_osclfo: Generate a Low Frequency Oscillation/Modulation of a parameter
+- jack_oscsend: Send Arbitrary OSC Message To Client
