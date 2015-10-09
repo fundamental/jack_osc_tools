@@ -18,7 +18,7 @@ void validate_path(const char *path)
     if(c != '/')
         errx(1,"Path must start with '/'");
 
-    while(isalnum(c) || c == '/' || c == '-' || c == '_')
+    while(isalnum(c) || c == '/' || c == '-' || c == '_' || c == '.')
         c = *path++;
 
     if(c)
@@ -103,8 +103,8 @@ char *stringToOsc(int argc, char **argv)
     const char *path = *argv++;
     argc--;
 
-    char *typestring  = malloc(argc+1);
-    rtosc_arg_t *args = malloc(argc+1);
+    char *typestring  = (char*)malloc(argc+1);
+    rtosc_arg_t *args = (rtosc_arg_t*)malloc(argc+1);
 
     //Assume all remaining arguments are valid arguments
     unsigned nargs = argc;
@@ -125,7 +125,7 @@ char *stringToOsc(int argc, char **argv)
 
     size_t buf_size = rtosc_amessage(NULL, 0, 
             path, typestring, args);
-    char *buffer = malloc(buf_size);
+    char *buffer = (char*)malloc(buf_size);
     rtosc_amessage(buffer, buf_size, path, typestring, args);
     return buffer;
 }
@@ -157,10 +157,12 @@ int main(int argc, char **argv)
     argv++;
     argc--;
 
+    app = argv[0];
     if(!index(argv[0], ':')) {
         fprintf(stderr, "Invalid address\n");
+        fprintf(stderr, "\"%s\" does not contain port delimiter ':'\n", argv[0]);
+        return 1;
     }
-    app = argv[0];
     address = index(argv[0], ':');
     *address = 0;
     address++;
