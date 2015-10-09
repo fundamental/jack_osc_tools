@@ -104,7 +104,7 @@ char *stringToOsc(int argc, char **argv)
     argc--;
 
     char *typestring  = (char*)malloc(argc+1);
-    rtosc_arg_t *args = (rtosc_arg_t*)malloc(argc+1);
+    rtosc_arg_t *args = (rtosc_arg_t*)calloc(sizeof(rtosc_arg_t),(argc+1));
 
     //Assume all remaining arguments are valid arguments
     unsigned nargs = argc;
